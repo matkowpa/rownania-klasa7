@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Procenty krok po kroku — klasa 7</title>
+<meta name="description" content="11 kroków po 20 minut: procenty dla klasy 7. Filmy, ćwiczenia online i 24 zadania z odpowiedziami — ten sam układ co przy równaniach.">
+<meta property="og:title" content="Procenty krok po kroku — klasa 7">
+<meta property="og:description" content="Film → ćwiczenia → sprawdzenie. Procenty, podwyżki, VAT, punkty procentowe i 24 zadania.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0f4c81">
+<style>
+  :root{
+    --bg:#f4f6fa; --card:#ffffff; --ink:#16202e; --muted:#5b6b80;
+    --brand:#0f4c81; --brand-2:#1d6fb0; --accent:#f59e0b; --ok:#15803d;
+    --line:#e3e9f1; --soft:#eef4fa; --radius:18px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    line-height:1.55; -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--brand); text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:780px; margin:0 auto; padding:0 18px 60px}
+
+  /* hero */
+  .hero{
+    background:linear-gradient(160deg,#0f4c81 0%,#1d6fb0 70%,#2b86cc 100%);
+    color:#fff; padding:38px 0 30px; border-radius:0 0 26px 26px;
+    box-shadow:0 10px 30px rgba(15,76,129,.18);
+  }
+  .hero .wrap{padding-bottom:0; display:block}
+  .kicker{font-size:.82rem; letter-spacing:.14em; text-transform:uppercase; opacity:.85}
+  h1{font-size:clamp(1.7rem,5vw,2.4rem); line-height:1.15; margin:.35rem 0 .5rem; letter-spacing:-.02em}
+  .sub{font-size:1.02rem; opacity:.94; margin:0 0 1.1rem}
+  .meta{display:flex; flex-wrap:wrap; gap:8px}
+  .pill{background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.25); padding:5px 11px; border-radius:999px; font-size:.82rem}
+
+  /* progress */
+  .progress-card{
+    background:var(--card); border-radius:var(--radius); padding:16px 18px; margin:-22px 0 22px;
+    box-shadow:0 6px 18px rgba(22,32,46,.07); border:1px solid var(--line); position:relative;
+  }
+  .progress-top{display:flex; justify-content:space-between; align-items:baseline; gap:10px; font-size:.9rem}
+  .progress-top b{font-size:1rem}
+  .bar{height:10px; background:var(--soft); border-radius:999px; overflow:hidden; margin-top:9px}
+  .bar span{display:block; height:100%; width:0; background:linear-gradient(90deg,var(--brand),#2b86cc); transition:width .35s ease}
+  .reset{background:none; border:0; color:var(--muted); font-size:.8rem; cursor:pointer; padding:0; text-decoration:underline}
+
+  /* blocks */
+  .lead{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:18px 20px; margin:0 0 24px}
+  .lead h2{margin:0 0 8px; font-size:1.05rem}
+  .lead ul{margin:0; padding-left:20px}
+  .lead li{margin:.25rem 0}
+
+  h2.section{font-size:1.15rem; margin:30px 0 12px; letter-spacing:-.01em}
+  .steps{display:flex; flex-direction:column; gap:14px}
+
+  .step{
+    background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+    padding:0; overflow:hidden; box-shadow:0 2px 8px rgba(22,32,46,.04);
+    transition:border-color .2s, box-shadow .2s;
+  }
+  .step.done{border-color:#b7e4c7; box-shadow:0 2px 8px rgba(21,128,61,.08)}
+  .step-head{display:flex; gap:14px; align-items:flex-start; padding:16px 18px 12px}
+  .num{
+    flex:0 0 40px; height:40px; border-radius:50%; display:grid; place-items:center;
+    background:var(--soft); color:var(--brand); font-weight:800; font-size:1.05rem;
+  }
+  .step.done .num{background:#dcfce7; color:var(--ok)}
+  .step-title{flex:1; min-width:0}
+  .step-title h3{margin:0; font-size:1.03rem; line-height:1.3; letter-spacing:-.01em}
+  .step-title .time{display:block; color:var(--muted); font-size:.8rem; margin-top:2px}
+  .check{
+    flex:0 0 auto; display:flex; align-items:center; gap:7px; cursor:pointer; user-select:none;
+    font-size:.8rem; color:var(--muted); background:var(--soft); padding:7px 10px; border-radius:999px;
+    border:1px solid transparent; transition:.2s;
+  }
+  .check input{width:17px; height:17px; accent-color:var(--ok); margin:0; cursor:pointer}
+  .step.done .check{background:#dcfce7; color:var(--ok); border-color:#b7e4c7}
+
+  .step-body{padding:0 18px 18px 72px}
+  .block{margin:10px 0 0}
+  .label{display:inline-flex; align-items:center; gap:6px; font-size:.74rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin-bottom:5px}
+  .label.watch{color:#b45309}
+  .label.do{color:var(--brand)}
+  .label.checkit{color:var(--ok)}
+  .links{display:flex; flex-wrap:wrap; gap:8px}
+  .btn{
+    display:inline-flex; align-items:center; gap:7px; padding:9px 14px; border-radius:11px;
+    background:var(--brand); color:#fff; font-size:.9rem; font-weight:600; border:1px solid var(--brand);
+  }
+  .btn:hover{background:var(--brand-2); text-decoration:none}
+  .btn.ghost{background:#fff; color:var(--brand); border-color:#c9d9ea}
+  .btn.ghost:hover{background:var(--soft)}
+  .btn.small{padding:7px 11px; font-size:.83rem}
+  .hint{color:var(--muted); font-size:.86rem; margin:6px 0 0}
+  .do-list{margin:4px 0 0; padding-left:20px; font-size:.92rem}
+  .do-list li{margin:.2rem 0}
+
+  details{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:14px 18px; margin:10px 0}
+  details summary{cursor:pointer; font-weight:700; color:var(--brand)}
+  details[open] summary{margin-bottom:8px}
+
+  .diag{display:grid; gap:6px; margin:8px 0 0; padding-left:22px}
+  .diag li{font-size:1rem}
+
+  .tasks{display:grid; grid-template-columns:1fr 1fr; gap:6px 22px; padding-left:0; list-style:none; margin:8px 0 0}
+  .tasks li{padding:4px 0; border-bottom:1px dotted #c9d5e3; font-size:.95rem}
+  .tasks b{color:var(--brand)}
+  @media (max-width:560px){ .tasks{grid-template-columns:1fr} }
+
+  .rules{background:linear-gradient(180deg,#fffbeb,#fff7e0); border:1px solid #fde68a; border-radius:var(--radius); padding:18px 20px; margin:26px 0}
+  .rules h2{margin:0 0 8px; font-size:1.05rem}
+  .rules ol{margin:0; padding-left:20px}
+  .rules li{margin:.35rem 0}
+
+  .footer{color:var(--muted); font-size:.82rem; text-align:center; margin-top:34px; line-height:1.7}
+  .footer a{color:var(--muted); text-decoration:underline}
+
+  @media (max-width:520px){
+    .step-body{padding-left:18px}
+    .step-head{gap:10px}
+    .check{padding:6px 8px}
+    .check span{display:none}
+    .hero{padding-top:28px}
+  }
+
+  @media print{
+    body{background:#fff}
+    .hero{background:#fff; color:#000; box-shadow:none; border-bottom:1px solid #ccc}
+    .progress-card,.check,.reset,.btn{display:none}
+    .step{break-inside:avoid; box-shadow:none}
+    a{color:#000; text-decoration:underline}
+    .footer{display:none}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Plan nauki · matematyka · klasa 7</div>
+    <h1>Procenty krok po kroku</h1>
+    <p class="sub">Ten sam układ co przy równaniach: 11 kroków (0–10), po około 20 minut. W każdym kroku film, ćwiczenia i konkretne zadania z zestawu 24 — po kolei, bez przeskakiwania.</p>
+    <div class="meta">
+      <span class="pill">11 kroków</span>
+      <span class="pill">20 min dziennie</span>
+      <span class="pill">24 zadania z odpowiedziami</span>
+      <a class="pill" href="index.html">← Równania</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="progress-card" aria-label="Postęp">
+    <div class="progress-top">
+      <b id="progressText">Zrobione: 0 z 11</b>
+      <button class="reset" id="resetBtn" type="button">wyczyść postęp</button>
+    </div>
+    <div class="bar"><span id="progressBar"></span></div>
+  </section>
+
+  <section class="lead">
+    <h2>Jak korzystać z tej strony</h2>
+    <ul>
+      <li><b>Jeden krok = jedna sesja.</b> Nie rób dwóch kroków pod rząd, chyba że krok jest krótki.</li>
+      <li><b>Najpierw film, potem zadania.</b> Po filmie od razu zrób 5–8 przykładów — nie odkładaj na „później”.</li>
+      <li><b>Sprawdzaj odwrotną operacją.</b> Jeśli 15% z 240 to 36, to 36 / 240 = 0,15 = 15%. Jeśli 30% liczby to 18, to 0,30 · 60 = 18.</li>
+      <li><b>Odhaczaj kroki</b> — ptaszek zapisuje się w tej przeglądarce, więc po powrocie postęp zostaje.</li>
+      <li><b>Zeszyt błędów:</b> zapisuj typ błędu (procent vs punkt procentowy, cena przed/po, kolejne zmiany), nie tylko poprawną odpowiedź.</li>
+    </ul>
+  </section>
+
+  <h2 class="section">Kroki po kolei</h2>
+  <div class="steps" id="steps">
+
+    <article class="step" data-step="0">
+      <div class="step-head">
+        <div class="num">0</div>
+        <div class="step-title">
+          <h3>Sprawdź, od czego zaczynasz</h3>
+          <span class="time">10 minut · diagnoza, bez oceniania</span>
+        </div>
+        <label class="check"><input type="checkbox" data-check="0"><span>zrobione</span></label>
+      </div>
+      <div class="step-body">
+        
+<p class="hint">Rozwiąż 5 zadań na kartce. Nie zaglądaj do odpowiedzi przed skończeniem. Wynik mówi, który krok jest dla Ciebie pierwszy.</p>
+<ol class="diag">
+  <li>Zamień 25% na ułamek zwykły.</li>
+  <li>Ile to 10% z 70?</li>
+  <li>20% pewnej liczby to 12. Jaka to liczba?</li>
+  <li>Cena 80 zł wzrosła o 25%. Jaka jest nowa cena?</li>
+  <li>Jakim procentem liczby 50 jest liczba 10?</li>
+</ol>
+<details>
+  <summary>Pokaż odpowiedzi i co dalej</summary>
+  <p><b>Odpowiedzi:</b> 1/4 · 7 · 60 · 100 zł · 20%.</p>
+  <ul>
+    <li>1 źle → krok 1 i 2 (procent jako ułamek).</li>
+    <li>2 źle → krok 3 (procent z liczby).</li>
+    <li>3 źle → krok 4 (liczba z procentu).</li>
+    <li>4 źle → krok 6 (podwyżka).</li>
+    <li>5 źle → krok 5 (jaki to procent).</li>
+    <li>Wszystko dobrze → możesz zacząć od kroku 6.</li>
+  </ul>
+</details>
+
+      </div>
+    </article>
+    <article class="step" data-step="1">
+      <div class="step-head">
+        <div class="num">1</div>
+        <div class="step-title">
+          <h3>Procent to setna część całości</h3>
+          <span class="time">20 minut · fundament</span>
+        </div>
+        <label class="check"><input type="checkbox" data-check="1"><span>zrobione</span></label>
+      </div>
+      <div class="step-body">
+        
+<div class="block"><div class="label watch">▶ Obejrzyj</div><div class="links"><a class="btn" href="https://pistacja.tv/film/mat00162-procenty-wprowadzenie" target="_blank" rel="noopener">Procenty — wprowadzenie (Pi-stacja)</a></div></div>
+<div class="block"><div class="label do">✎ Zrób po lekcji</div><ul class="do-list">
+<li><a href="https://matzoo.pl/klasa7/zamiana-procentu-na-ulamek-zwykly_54_146" target="_blank" rel="noopener">Matzoo — zamiana procentu na ułamek zwykły</a> — 6 przykładów.</li>
+<li><a href="https://zpe.gov.pl/watek/LPvS7Va50Y/0/b/procenty/P1A88Mnra" target="_blank" rel="noopener">ZPE — cały wątek „Procenty”</a> — teorię czytaj tylko po filmie.</li>
+<li>Zestaw 24 zadań: <b>zadania 1–2</b>.</li>
+</ul></div>
+<div class="block"><div class="label checkit">✓ Sprawdź</div><p class="hint">1% = 1/100 = 0,01. 100% to całość, 50% połowa, 25% ćwierć, 10% jedna dziesiąta, 20% jedna piąta. 35% = 35/100 = 7/20 = 0,35.</p></div>
+
+      </div>
+    </article>
+    <article class="step" data-step="2">
+      <div class="step-head">
+        <div class="num">2</div>
+        <div class="step-title">
+          <h3>Zamiana: procent ↔ ułamek ↔ liczba</h3>
+          <span class="time">20 minut · bez tego reszta się sypie</span>
+        </div>
+        <label class="check"><input type="checkbox" data-check="2"><span>zrobione</span></label>
+      </div>
+      <div class="step-body">
+        
+<div class="block"><div class="label do">✎ Zrób</div><ul class="do-list">
+<li><a href="https://matzoo.pl/klasa7/zamiana-procentu-na-ulamek-dziesietny_54_145" target="_blank" rel="noopener">Matzoo — procent na ułamek dziesiętny</a>.</li>
+<li><a href="https://matzoo.pl/klasa7/zamiana-procentu-na-ulamek-zwykly_54_146" target="_blank" rel="noopener">Matzoo — procent na ułamek zwykły</a>.</li>
+<li>Zestaw 24 zadań: <b>zadania 1–3</b>.</li>
+</ul></div>
+<div class="block"><div class="label checkit">✓ Sprawdź</div><p class="hint">35% → 0,35 → 7/20. 0,08 → 8%. 3/4 → 75%. 0,5% → 0,005, a nie 0,5. Procent na liczbę: podziel przez 100. Liczbę na procent: pomnóż przez 100%.</p></div>
+
+      </div>
+    </article>
+    <article class="step" data-step="3">
+      <div class="step-head">
+        <div class="num">3</div>
+        <div class="step-title">
+          <h3>Procent z danej liczby</h3>
+          <span class="time">25 minut · najczęstszy typ zadania</span>
+        </div>
+        <label class="check"><input type="checkbox" data-check="3"><span>zrobione</span></label>
+      </div>
+      <div class="step-body">
+        
+<div class="block"><div class="label watch">▶ Obejrzyj</div><div class="links"><a class="btn" href="https://pistacja.tv/film/mat00165-obliczanie-procentu-danej-liczby" target="_blank" rel="noopener">Obliczanie procentu danej liczby (Pi-stacja)</a></div></div>
+<div class="block"><div class="label do">✎ Zrób po lekcji</div><ul class="do-list">
+<li><a href="https://matzoo.pl/klasa7/procent-z-danej-liczby_54_360" target="_blank" rel="noopener">Matzoo — procent z danej liczby</a> — 6 przykładów.</li>
+<li><a href="https://zpe.gov.pl/a/obliczanie-procentu-danej-liczby/D17ivCYv5" target="_blank" rel="noopener">ZPE — obliczanie procentu danej liczby</a> — ćwiczenia 1–3.</li>
+<li>Zestaw 24 zadań: <b>zadania 4–8</b>.</li>
+</ul></div>
+<div class="block"><div class="label checkit">✓ Sprawdź</div><p class="hint">p% z a = (p/100) · a. 15% z 240 = 0,15 · 240 = 36. 12,5% z 320 = 0,125 · 320 = 40. Sprawdzenie odwrotne: 36 / 240 = 0,15 = 15%.</p></div>
+
+      </div>
+    </article>
+    <article class="step" data-step="4">
+      <div class="step-head">
+        <div class="num">4</div>
+        <div class="step-title">
+          <h3>Liczba, gdy znamy jej procent</h3>
+          <span class="time">25 minut · zadanie odwrotne</span>
+        </div>
+        <label class="check"><input type="checkbox" data-check="4"><span>zrobione</span></label>
+      </div>
+      <div class="step-body">
+        
+<div class="block"><div class="label watch">▶ Obejrzyj</div><div class="links"><a class="btn" href="https://pistacja.tv/film/mat00167-obliczanie-liczby-gdy-dany-jest-jej-procent" target="_blank" rel="noopener">Obliczanie liczby, gdy dany jest jej procent (Pi-stacja)</a></div></div>
+<div class="block"><div class="label do">✎ Zrób po lekcji</div><ul class="do-list">
+<li><a href="https://matzoo.pl/klasa7/zadania-tekstowe-obliczanie-liczby_54_205" target="_blank" rel="noopener">Matzoo — zadania tekstowe: obliczanie liczby</a>.</li>
+<li>Zestaw 24 zadań: <b>zadania 9–10</b>.</li>
+<li>Zapisz równanie: 0,30 · x = 18, potem x = 18 : 0,30.</li>
+</ul></div>
+<div class="block"><div class="label checkit">✓ Sprawdź</div><p class="hint">Jeśli 30% liczby to 18, całość to 18 : 0,30 = 60. Jeśli 120% to 54, całość to 54 : 1,20 = 45. Zawsze pomnóż wynik przez procent — musi wrócić do wartości z zadania.</p></div>
+
+      </div>
+    </article>
+    <article class="step" data-step="5">
+      <div class="step-head">
+        <div class="num">5</div>
+        <div class="step-title">
+          <h3>Jakim procentem jednej liczby jest druga</h3>
+          <span class="time">20 minut · ułamek zamieniony na procent</span>
+        </div>
+        <label class="check"><input type="checkbox" data-check="5"><span>zrobione</span></label>
+      </div>
+      <div class="step-body">
+        
+<div class="block"><div class="label watch">▶ Obejrzyj</div><div class="links"><a class="btn" href="https://pistacja.tv/film/mat00335-obliczanie-jakim-procentem-jednej-liczby-jest-druga-liczba" target="_blank" rel="noopener">Jakim procentem jednej liczby jest druga (Pi-stacja)</a></div></div>
+<div class="block"><div class="label do">✎ Zrób po lekcji</div><ul class="do-list">
+<li><a href="https://matzoo.pl/klasa7/jaki-to-procent-z-liczby_54_361" target="_blank" rel="noopener">Matzoo — jaki to procent z liczby</a>.</li>
+<li>Zestaw 24 zadań: <b>zadania 11–12</b>.</li>
+</ul></div>
+<div class="block"><div class="label checkit">✓ Sprawdź</div><p class="hint">(część / całość) · 100%. 28 z 80 to 28/80 = 0,35 = 35%. 40 z 25 to 40/25 = 1,6 = 160% — wynik może być większy niż 100%.</p></div>
+
+      </div>
+    </article>
+    <article class="step" data-step="6">
+      <div class="step-head">
+        <div class="num">6</div>
+        <div class="step-title">
+          <h3>Podwyżki i obniżki</h3>
+          <span class="time">25 minut · cena przed i po</span>
+        </div>
+        <label class="check"><input type="checkbox" data-check="6"><span>zrobione</span></label>
+      </div>
+      <div class="step-body">
+        
+<div class="block"><div class="label watch">▶ Obejrzyj</div><div class="links">
+<a class="btn" href="https://pistacja.tv/film/mat00341-podwyzki" target="_blank" rel="noopener">Podwyżki (Pi-stacja)</a>
+<a class="btn ghost" href="https://pistacja.tv/film/mat00342-obnizki" target="_blank" rel="noopener">Obniżki (Pi-stacja)</a>
+</div></div>
+<div class="block"><div class="label do">✎ Zrób po lekcji</div><ul class="do-list">
+<li><a href="https://matzoo.pl/klasa7/zadania-tekstowe-procenty-w-cenach_54_204" target="_blank" rel="noopener">Matzoo — procenty w cenach</a>.</li>
+<li>Zestaw 24 zadań: <b>zadania 13–14 oraz 16–17</b>.</li>
+</ul></div>
+<div class="block"><div class="label checkit">✓ Sprawdź</div><p class="hint">Nowa cena = stara · (1 ± p/100). Podwyżka o 12%: 450 · 1,12 = 504 zł. Po obniżce o 20% kurtka kosztuje 184 zł, czyli 184 to 80% starej ceny: 184 : 0,8 = 230 zł. Nie dodawaj 20% do 184.</p></div>
+
+      </div>
+    </article>
+    <article class="step" data-step="7">
+      <div class="step-head">
+        <div class="num">7</div>
+        <div class="step-title">
+          <h3>VAT, podatki i lokaty</h3>
+          <span class="time">20 minut · procent w życiu</span>
+        </div>
+        <label class="check"><input type="checkbox" data-check="7"><span>zrobione</span></label>
+      </div>
+      <div class="step-body">
+        
+<div class="block"><div class="label watch">▶ Obejrzyj</div><div class="links"><a class="btn" href="https://pistacja.tv/film/mat00339-podatki" target="_blank" rel="noopener">Podatki — netto, brutto, VAT (Pi-stacja)</a></div></div>
+<div class="block"><div class="label do">✎ Zrób po lekcji</div><ul class="do-list">
+<li><a href="https://matzoo.pl/klasa7/zadania-tekstowe-pozyczki-i-lokaty_54_206" target="_blank" rel="noopener">Matzoo — pożyczki i lokaty</a>.</li>
+<li>Zestaw 24 zadań: <b>zadanie 15</b>.</li>
+</ul></div>
+<div class="block"><div class="label checkit">✓ Sprawdź</div><p class="hint">Brutto = netto · (1 + VAT). VAT 23% od 800 zł to 184 zł, więc brutto to 984 zł. VAT liczymy od netto, nie od brutto. Lokata roczna: odsetki = kapitał · oprocentowanie.</p></div>
+
+      </div>
+    </article>
+    <article class="step" data-step="8">
+      <div class="step-head">
+        <div class="num">8</div>
+        <div class="step-title">
+          <h3>Punkty procentowe i kolejne zmiany</h3>
+          <span class="time">25 minut · największa pułapka</span>
+        </div>
+        <label class="check"><input type="checkbox" data-check="8"><span>zrobione</span></label>
+      </div>
+      <div class="step-body">
+        
+<div class="block"><div class="label watch">▶ Obejrzyj</div><div class="links"><a class="btn" href="https://pistacja.tv/film/mat00344-procenty-w-zadaniach-tekstowych" target="_blank" rel="noopener">Procenty w zadaniach tekstowych (Pi-stacja)</a></div></div>
+<div class="block"><div class="label do">✎ Zrób po lekcji</div><ul class="do-list">
+<li><a href="https://zpe.gov.pl/watek/LPvS7Va50Y/0/a/7-obliczenia-procentowe/D9WY7cREF" target="_blank" rel="noopener">ZPE — obliczenia procentowe</a> — zadania 1–6.</li>
+<li>Zestaw 24 zadań: <b>zadania 18–20</b>.</li>
+</ul></div>
+<div class="block"><div class="label checkit">✓ Sprawdź</div><p class="hint">Wzrost z 8% do 10% to <b>2 punkty procentowe</b>, ale względem 8% to wzrost o 25%. Kolejne zmiany mnożysz: 200 · 1,10 · 0,90 = 198 zł. Dwie obniżki po 20%: 128 : 0,8 : 0,8 = 200 zł.</p></div>
+
+      </div>
+    </article>
+    <article class="step" data-step="9">
+      <div class="step-head">
+        <div class="num">9</div>
+        <div class="step-title">
+          <h3>Sprawdzian — procenty</h3>
+          <span class="time">20–25 minut · bez pomocy</span>
+        </div>
+        <label class="check"><input type="checkbox" data-check="9"><span>zrobione</span></label>
+      </div>
+      <div class="step-body">
+        
+<div class="block"><div class="label do">✎ Zrób</div><div class="links">
+<a class="btn" href="https://szaloneliczby.pl/procenty-sprawdzian-klasa-7/" target="_blank" rel="noopener">Sprawdzian: Procenty — 14 zadań</a>
+<a class="btn ghost" href="https://szaloneliczby.pl/obliczenia-procentowe-sprawdzian-klasa-7/" target="_blank" rel="noopener">Obliczenia procentowe — 8 zadań</a>
+</div><p class="hint">14 zadań, 20 punktów, 20–25 minut. Po sprawdzeniu zapisz w zeszycie błędów każde zadanie, które nie dało pełnego wyniku — z typem błędu, nie tylko poprawną odpowiedzią.</p></div>
+<div class="block"><div class="label do">✎ Dodatkowo</div><ul class="do-list">
+<li>Zestaw 24 zadań: <b>zadania 21–23</b>.</li>
+<li><a href="https://szaloneliczby.pl/procenty-podstawy-sprawdzian-klasa-7/" target="_blank" rel="noopener">Procenty (podstawy)</a> — 8 zadań, jeśli 14-zadaniowy sprawdzian poszedł słabo.</li>
+</ul></div>
+
+      </div>
+    </article>
+    <article class="step" data-step="10">
+      <div class="step-head">
+        <div class="num">10</div>
+        <div class="step-title">
+          <h3>Powtórka tylko tego, co nie wyszło</h3>
+          <span class="time">20 minut · domknięcie tematu</span>
+        </div>
+        <label class="check"><input type="checkbox" data-check="10"><span>zrobione</span></label>
+      </div>
+      <div class="step-body">
+        
+<div class="block"><div class="label do">✎ Zrób</div><ul class="do-list">
+<li>Otwórz zeszyt błędów i rozwiąż ponownie <b>tylko</b> te zadania, które wcześniej nie wyszły.</li>
+<li><a href="https://matzoo.pl/klasa7/zadania-tekstowe-procenty-w-cenach_54_204" target="_blank" rel="noopener">Matzoo — procenty w cenach</a> — 5 przykładów na koniec.</li>
+<li>Zestaw 24 zadań: <b>zadania 19–24</b>, jeśli chcesz sprawdzić całość.</li>
+</ul></div>
+<div class="block"><div class="label checkit">✓ Sprawdź</div><p class="hint">Cel: 14/14 w sprawdzianie i zero powtarzających się błędów. Jeśli któryś typ błędu wraca trzeci raz — wróć do konkretnego kroku, nie do całego działu.</p></div>
+
+      </div>
+    </article>
+  </div>
+
+  <h2 class="section">Zestaw 24 zadań</h2>
+  <details open>
+    <summary>Zadania (poziomy 1–4)</summary>
+    <ul class="tasks">
+      <li><b>1.</b> Zamień 35% na ułamek zwykły nieskracalny.</li>
+      <li><b>2.</b> Zamień 0,08 na procent.</li>
+      <li><b>3.</b> Zamień 3/4 na procent.</li>
+      <li><b>4.</b> Ile to 1% z 250?</li>
+      <li><b>5.</b> Ile to 10% z 80?</li>
+      <li><b>6.</b> Ile to 50% z 46?</li>
+      <li><b>7.</b> Oblicz 15% liczby 240.</li>
+      <li><b>8.</b> Oblicz 12,5% liczby 320.</li>
+      <li><b>9.</b> 30% pewnej liczby to 18. Jaka to liczba?</li>
+      <li><b>10.</b> 120% pewnej liczby to 54. Jaka to liczba?</li>
+      <li><b>11.</b> Jakim procentem liczby 80 jest liczba 28?</li>
+      <li><b>12.</b> Jakim procentem liczby 25 jest liczba 40?</li>
+      <li><b>13.</b> Cena 450 zł wzrosła o 12%. Jaka jest nowa cena?</li>
+      <li><b>14.</b> Po obniżce o 20% kurtka kosztuje 184 zł. Ile kosztowała przed obniżką?</li>
+      <li><b>15.</b> Cena netto 800 zł, VAT 23%. Ile wynosi cena brutto?</li>
+      <li><b>16.</b> O ile procent zmieniła się cena z 40 zł na 50 zł?</li>
+      <li><b>17.</b> O ile procent zmieniła się cena z 50 zł na 40 zł?</li>
+      <li><b>18.</b> Bezrobocie wzrosło z 8% do 10%. O ile punktów procentowych? O ile procent?</li>
+      <li><b>19.</b> Cenę 200 zł najpierw podwyższono o 10%, potem obniżono o 10%. Jaka jest cena końcowa?</li>
+      <li><b>20.</b> Po dwóch obniżkach o 20% cena wynosi 128 zł. Jaka była cena początkowa?</li>
+      <li><b>21.</b> W klasie 7a jest 13 chłopców i 7 dziewcząt. Jaki procent klasy stanowią dziewczęta?</li>
+      <li><b>22.</b> W ankiecie wzięło udział 240 osób. 35% wybrało piłkę nożną, 25% koszykówkę, reszta siatkówkę. Ile osób wybrało siatkówkę?</li>
+      <li><b>23.</b> Rodzina ma budżet 6000 zł: 30% mieszkanie, 15% jedzenie, 10% transport, reszta oszczędności. Ile złotych oszczędza miesięcznie?</li>
+      <li><b>24.</b> Rower kosztuje 1200 zł. Najpierw obniżono cenę o 15%, a przy kasie udzielono jeszcze 10% rabatu od nowej ceny. Ile zapłaci klient? O ile procent łącznie obniżono cenę?</li>
+    </ul>
+    <p class="hint" style="margin-top:12px"><a class="btn ghost small" href="zestaw-24-zadan-procenty.pdf" download>Pobierz wersję do wydruku (PDF)</a></p>
+  </details>
+  <details>
+    <summary>Odpowiedzi (nie zaglądaj przed rozwiązaniem)</summary>
+    <p>1. 7/20 · 2. 8% · 3. 75% · 4. 2,5 · 5. 8 · 6. 23 · 7. 36 · 8. 40 · 9. 60 · 10. 45 · 11. 35% · 12. 160% · 13. 504 zł · 14. 230 zł · 15. 984 zł · 16. wzrosła o 25% · 17. spadła o 20% · 18. 2 p.p.; o 25% · 19. 198 zł · 20. 200 zł · 21. 35% · 22. 96 osób · 23. 2700 zł · 24. 918 zł; łącznie o 23,5%</p>
+    <p class="hint">18: 10% − 8% = 2 p.p.; (10 − 8) / 8 = 25%. 19: 200 · 1,10 · 0,90 = 198. 20: 128 : 0,8 : 0,8 = 200. 23: 100% − 30% − 15% − 10% = 45%; 0,45 · 6000 = 2700. 24: 1200 · 0,85 · 0,90 = 918; (1200 − 918) / 1200 = 23,5%.</p>
+  </details>
+
+  <section class="rules">
+    <h2>Pięć zasad, które robią różnicę</h2>
+    <ol>
+      <li><b>Procent to setna część.</b> 1% = 1/100 = 0,01, więc p% = p/100. 35% to 0,35, a nie 3,5.</li>
+      <li><b>Zamiana w obie strony.</b> Procent → liczba: podziel przez 100. Liczba → procent: pomnóż przez 100%.</li>
+      <li><b>Dwie różne strony tego samego zadania.</b> p% z a = (p/100) · a. Jeśli a to p% całości, całość = a : (p/100).</li>
+      <li><b>Podwyżka i obniżka to mnożenie.</b> O p% w górę: · (1 + p/100). O p% w dół: · (1 − p/100).</li>
+      <li><b>Kolejne zmiany mnożysz, a punktów procentowych nie mylisz z procentami.</b> +10% i −10% nie wracają do ceny wyjściowej.</li>
+    </ol>
+  </section>
+
+  <p class="footer">
+    Plan przygotowany dla ucznia klasy 7 · listopad 2026<br>
+    Źródła: <a href="https://pistacja.tv/wideolekcje/matematyka/szkola-podstawowa-vii-viii/obliczenia-procentowe/plmat063-procenty" target="_blank" rel="noopener">Pi-stacja — Procenty</a> ·
+    <a href="https://matzoo.pl/klasa7/procent-z-danej-liczby_54_360" target="_blank" rel="noopener">Matzoo</a> ·
+    <a href="https://zpe.gov.pl/watek/LPvS7Va50Y/0/b/procenty/P1A88Mnra" target="_blank" rel="noopener">ZPE</a> ·
+    <a href="https://szaloneliczby.pl/procenty-sprawdzian-klasa-7/" target="_blank" rel="noopener">Szalone Liczby</a>
+  </p>
+</main>
+
+<script>
+(function () {
+  var KEY = "procenty-klasa7-progress-v1";
+  var boxes = Array.prototype.slice.call(document.querySelectorAll("input[data-check]"));
+  var total = boxes.length;
+  var text = document.getElementById("progressText");
+  var bar = document.getElementById("progressBar");
+
+  function load() {
+    try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { return {}; }
+  }
+  function save(state) {
+    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+  }
+  function render() {
+    var done = boxes.filter(function (b) { return b.checked; }).length;
+    text.textContent = "Zrobione: " + done + " z " + total;
+    bar.style.width = (total ? Math.round(done / total * 100) : 0) + "%";
+    boxes.forEach(function (b) {
+      var card = b.closest(".step");
+      if (card) card.classList.toggle("done", b.checked);
+    });
+  }
+
+  var state = load();
+  boxes.forEach(function (b) {
+    b.checked = !!state[b.getAttribute("data-check")];
+    b.addEventListener("change", function () {
+      state[b.getAttribute("data-check")] = b.checked;
+      save(state);
+      render();
+    });
+  });
+
+  var reset = document.getElementById("resetBtn");
+  if (reset) reset.addEventListener("click", function () {
+    if (!confirm("Wyczyścić wszystkie odhaczone kroki?")) return;
+    state = {};
+    save(state);
+    boxes.forEach(function (b) { b.checked = false; });
+    render();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
